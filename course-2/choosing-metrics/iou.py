@@ -28,8 +28,27 @@ def calculate_iou(gt_bbox, pred_bbox):
     returns:
     - iou [float]: iou between 2 bboxes
     """
-    ## IMPLEMENT THIS FUNCTION
+    ## IMPLEMENT THIS FUNCTION  
+    x1_gt, y1_gt, x2_gt, y2_gt = gt_bbox
+    x1_pred, y1_pred, x2_pred, y2_pred = pred_bbox
 
+    x1_intersect = max(x1_gt, x1_pred)
+    y1_intersect = max(y1_gt, y1_pred)
+    x2_intersect = min(x2_gt, x2_pred)
+    y2_intersect = min(y2_gt, y2_pred)
+
+    width_intersect = max(0, x2_intersect - x1_intersect)
+    height_intersect = max(0, y2_intersect - y1_intersect)
+    area_intersection = width_intersect * height_intersect
+
+    area_gt = (x2_gt - x1_gt) * (y2_gt - y1_gt)
+    area_pred = (x2_pred - x1_pred) * (y2_pred - y1_pred)
+    
+    area_union = area_gt + area_pred - area_intersection
+    if area_union == 0:
+        return 0.0
+
+    iou = area_intersection / area_union    
     return iou
 
 
