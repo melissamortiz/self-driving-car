@@ -41,6 +41,24 @@ def precision_recall(ious, gt_classes, pred_classes):
     
     precision = tp / (tp + fp) if (tp + fp) > 0 else 0
     recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+
+    # Preferred Solution
+    # xs, ys = np.where(ious>0.5)
+
+    # # calculate true positive and true negative
+    # tps = 0
+    # fps = 0
+    # for x, y in zip(xs, ys):
+    #     if gt_classes[x] == pred_classes[y]:
+    #         tps += 1
+    #     else:
+    #         fps += 1
+
+    # matched_gt = len(np.unique(xs))
+    # fns = len(gt_classes) - matched_gt
+
+    # precision = tps / (tps+fps)
+    # recall = tps / (tps + fns)
     return precision, recall
 
 
